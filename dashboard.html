@@ -1,0 +1,431 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2759
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red183\green111\blue247;\red23\green24\blue24;\red202\green202\blue202;
+\red54\green192\blue160;\red212\green212\blue212;\red113\green192\blue131;\red246\green124\blue48;\red109\green115\blue120;
+\red238\green46\blue56;}
+{\*\expandedcolortbl;;\cssrgb\c77255\c54118\c97647;\cssrgb\c11765\c12157\c12549;\cssrgb\c83137\c83137\c83137;
+\cssrgb\c23922\c78824\c69020;\cssrgb\c86275\c86275\c86275;\cssrgb\c50588\c78824\c58431;\cssrgb\c98039\c56471\c24314;\cssrgb\c50196\c52549\c54510;
+\cssrgb\c95686\c27843\c27843;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs28 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 import\cf4 \strokec4  \cf5 \strokec5 React\cf6 \strokec6 ,\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \strokec4  useState\cf6 \strokec6 ,\cf4 \strokec4  useEffect\cf6 \strokec6 ,\cf4 \strokec4  useRef \cf6 \strokec6 \}\cf4 \strokec4  \cf2 \strokec2 from\cf4 \strokec4  \cf7 \strokec7 'react'\cf6 \strokec6 ;\cf4 \cb1 \strokec4 \
+\cf2 \cb3 \strokec2 import\cf4 \strokec4  \cf5 \strokec5 Chart\cf4 \strokec4  \cf2 \strokec2 from\cf4 \strokec4  \cf7 \strokec7 'chart.js/auto'\cf6 \strokec6 ;\cf4 \cb1 \strokec4 \
+\
+\cf2 \cb3 \strokec2 const\cf4 \strokec4  colors \cf6 \strokec6 =\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \cb1 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3   primary\cf6 \strokec6 :\cf4 \strokec4  \cf7 \strokec7 '#0d2e56'\cf6 \strokec6 ,\cf4 \cb1 \strokec4 \
+\cb3   secondary\cf6 \strokec6 :\cf4 \strokec4  \cf7 \strokec7 '#1791c7'\cf6 \strokec6 ,\cf4 \cb1 \strokec4 \
+\cb3   positive\cf6 \strokec6 :\cf4 \strokec4  \cf7 \strokec7 '#35ce8d'\cf6 \strokec6 ,\cf4 \cb1 \strokec4 \
+\cb3   negative\cf6 \strokec6 :\cf4 \strokec4  \cf7 \strokec7 '#ff8811'\cf6 \strokec6 ,\cf4 \cb1 \strokec4 \
+\cb3   background\cf6 \strokec6 :\cf4 \strokec4  \cf7 \strokec7 '#fbf5f3'\cf6 \strokec6 ,\cf4 \cb1 \strokec4 \
+\cb3   text\cf6 \strokec6 :\cf4 \strokec4  \cf7 \strokec7 '#fbf5f3'\cf6 \strokec6 ,\cf4 \cb1 \strokec4 \
+\cb3   neutral\cf6 \strokec6 :\cf4 \strokec4  \cf7 \strokec7 '#e2e8f0'\cf6 \strokec6 ,\cf4 \cb1 \strokec4 \
+\cb3   dark\cf6 \strokec6 :\cf4 \strokec4  \cf7 \strokec7 '#2d3748'\cf6 \strokec6 ,\cf4 \cb1 \strokec4 \
+\cb3   darker\cf6 \strokec6 :\cf4 \strokec4  \cf7 \strokec7 '#1a202c'\cf6 \strokec6 ,\cf4 \cb1 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf6 \cb3 \strokec6 \};\cf4 \cb1 \strokec4 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 const\cf4 \strokec4  defaultInputs \cf6 \strokec6 =\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \cb1 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3   fleetSize\cf6 \strokec6 :\cf4 \strokec4  \cf8 \strokec8 20\cf6 \strokec6 ,\cf4 \cb1 \strokec4 \
+\cb3   idleTime\cf6 \strokec6 :\cf4 \strokec4  \cf8 \strokec8 8\cf6 \strokec6 ,\cf4 \cb1 \strokec4 \
+\cb3   fuelPrice\cf6 \strokec6 :\cf4 \strokec4  \cf8 \strokec8 3.50\cf6 \strokec6 ,\cf4 \cb1 \strokec4 \
+\cb3   apuInstallationCost\cf6 \strokec6 :\cf4 \strokec4  \cf8 \strokec8 10000\cf6 \strokec6 ,\cf4 \cb1 \strokec4 \
+\cb3   apuMaintenanceCost\cf6 \strokec6 :\cf4 \strokec4  \cf8 \strokec8 500\cf6 \strokec6 ,\cf4 \cb1 \strokec4 \
+\cb3   apuUsefulLife\cf6 \strokec6 :\cf4 \strokec4  \cf8 \strokec8 5\cf6 \strokec6 ,\cf4 \cb1 \strokec4 \
+\cb3   operatingDaysPerYear\cf6 \strokec6 :\cf4 \strokec4  \cf8 \strokec8 300\cf6 \strokec6 ,\cf4 \cb1 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf6 \cb3 \strokec6 \};\cf4 \cb1 \strokec4 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 function\cf4 \strokec4  \cf5 \strokec5 App\cf6 \strokec6 ()\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \cb1 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3   \cf2 \strokec2 const\cf4 \strokec4  \cf6 \strokec6 [\cf4 \strokec4 inputs\cf6 \strokec6 ,\cf4 \strokec4  setInputs\cf6 \strokec6 ]\cf4 \strokec4  \cf6 \strokec6 =\cf4 \strokec4  useState\cf6 \strokec6 (\cf4 \strokec4 defaultInputs\cf6 \strokec6 );\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 const\cf4 \strokec4  \cf6 \strokec6 [\cf4 \strokec4 results\cf6 \strokec6 ,\cf4 \strokec4  setResults\cf6 \strokec6 ]\cf4 \strokec4  \cf6 \strokec6 =\cf4 \strokec4  useState\cf6 \strokec6 (\cf2 \strokec2 null\cf6 \strokec6 );\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 const\cf4 \strokec4  chart1Ref \cf6 \strokec6 =\cf4 \strokec4  useRef\cf6 \strokec6 (\cf2 \strokec2 null\cf6 \strokec6 );\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 const\cf4 \strokec4  chart2Ref \cf6 \strokec6 =\cf4 \strokec4  useRef\cf6 \strokec6 (\cf2 \strokec2 null\cf6 \strokec6 );\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 const\cf4 \strokec4  chart3Ref \cf6 \strokec6 =\cf4 \strokec4  useRef\cf6 \strokec6 (\cf2 \strokec2 null\cf6 \strokec6 );\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 const\cf4 \strokec4  leftPanelRef \cf6 \strokec6 =\cf4 \strokec4  useRef\cf6 \strokec6 (\cf2 \strokec2 null\cf6 \strokec6 );\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 const\cf4 \strokec4  rightPanelRef \cf6 \strokec6 =\cf4 \strokec4  useRef\cf6 \strokec6 (\cf2 \strokec2 null\cf6 \strokec6 );\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf2 \strokec2 const\cf4 \strokec4  chart1Instance \cf6 \strokec6 =\cf4 \strokec4  useRef\cf6 \strokec6 (\cf2 \strokec2 null\cf6 \strokec6 );\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 const\cf4 \strokec4  chart2Instance \cf6 \strokec6 =\cf4 \strokec4  useRef\cf6 \strokec6 (\cf2 \strokec2 null\cf6 \strokec6 );\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 const\cf4 \strokec4  chart3Instance \cf6 \strokec6 =\cf4 \strokec4  useRef\cf6 \strokec6 (\cf2 \strokec2 null\cf6 \strokec6 );\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf2 \strokec2 const\cf4 \strokec4  \cf6 \strokec6 [\cf4 \strokec4 leftPanelHeight\cf6 \strokec6 ,\cf4 \strokec4  setLeftPanelHeight\cf6 \strokec6 ]\cf4 \strokec4  \cf6 \strokec6 =\cf4 \strokec4  useState\cf6 \strokec6 (\cf7 \strokec7 'auto'\cf6 \strokec6 );\cf4 \cb1 \strokec4 \
+\
+\cb3   useEffect\cf6 \strokec6 (()\cf4 \strokec4  \cf6 \strokec6 =>\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 const\cf4 \strokec4  newResults \cf6 \strokec6 =\cf4 \strokec4  calculateSavings\cf6 \strokec6 (\cf4 \strokec4 inputs\cf6 \strokec6 );\cf4 \cb1 \strokec4 \
+\cb3     setResults\cf6 \strokec6 (\cf4 \strokec4 newResults\cf6 \strokec6 );\cf4 \cb1 \strokec4 \
+\cb3   \cf6 \strokec6 \},\cf4 \strokec4  \cf6 \strokec6 [\cf4 \strokec4 inputs\cf6 \strokec6 ]);\cf4 \cb1 \strokec4 \
+\
+\cb3   useEffect\cf6 \strokec6 (()\cf4 \strokec4  \cf6 \strokec6 =>\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 if\cf4 \strokec4  \cf6 \strokec6 (\cf4 \strokec4 results\cf6 \strokec6 )\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \cb1 \strokec4 \
+\cb3       updateChart1\cf6 \strokec6 ();\cf4 \cb1 \strokec4 \
+\cb3       updateChart2\cf6 \strokec6 ();\cf4 \cb1 \strokec4 \
+\cb3       updateChart3\cf6 \strokec6 ();\cf4 \cb1 \strokec4 \
+\cb3     \cf6 \strokec6 \}\cf4 \cb1 \strokec4 \
+\cb3   \cf6 \strokec6 \},\cf4 \strokec4  \cf6 \strokec6 [\cf4 \strokec4 results\cf6 \strokec6 ]);\cf4 \cb1 \strokec4 \
+\
+\cb3   useEffect\cf6 \strokec6 (()\cf4 \strokec4  \cf6 \strokec6 =>\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 const\cf4 \strokec4  updateHeight \cf6 \strokec6 =\cf4 \strokec4  \cf6 \strokec6 ()\cf4 \strokec4  \cf6 \strokec6 =>\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \cb1 \strokec4 \
+\cb3       \cf2 \strokec2 if\cf4 \strokec4  \cf6 \strokec6 (\cf4 \strokec4 rightPanelRef\cf6 \strokec6 .\cf4 \strokec4 current\cf6 \strokec6 )\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \cb1 \strokec4 \
+\cb3         setLeftPanelHeight\cf6 \strokec6 (\cf4 \strokec4 rightPanelRef\cf6 \strokec6 .\cf4 \strokec4 current\cf6 \strokec6 .\cf4 \strokec4 offsetHeight\cf6 \strokec6 );\cf4 \cb1 \strokec4 \
+\cb3       \cf6 \strokec6 \}\cf4 \cb1 \strokec4 \
+\cb3     \cf6 \strokec6 \};\cf4 \cb1 \strokec4 \
+\cb3     updateHeight\cf6 \strokec6 ();\cf4 \cb1 \strokec4 \
+\cb3     window\cf6 \strokec6 .\cf4 \strokec4 addEventListener\cf6 \strokec6 (\cf7 \strokec7 'resize'\cf6 \strokec6 ,\cf4 \strokec4  updateHeight\cf6 \strokec6 );\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 return\cf4 \strokec4  \cf6 \strokec6 ()\cf4 \strokec4  \cf6 \strokec6 =>\cf4 \strokec4  window\cf6 \strokec6 .\cf4 \strokec4 removeEventListener\cf6 \strokec6 (\cf7 \strokec7 'resize'\cf6 \strokec6 ,\cf4 \strokec4  updateHeight\cf6 \strokec6 );\cf4 \cb1 \strokec4 \
+\cb3   \cf6 \strokec6 \},\cf4 \strokec4  \cf6 \strokec6 [\cf4 \strokec4 results\cf6 \strokec6 ]);\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf2 \strokec2 const\cf4 \strokec4  handleInputChange \cf6 \strokec6 =\cf4 \strokec4  \cf6 \strokec6 (\cf4 \strokec4 e\cf6 \strokec6 )\cf4 \strokec4  \cf6 \strokec6 =>\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 const\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \strokec4  name\cf6 \strokec6 ,\cf4 \strokec4  value\cf6 \strokec6 ,\cf4 \strokec4  \cf2 \strokec2 type\cf4 \strokec4  \cf6 \strokec6 \}\cf4 \strokec4  \cf6 \strokec6 =\cf4 \strokec4  e\cf6 \strokec6 .\cf4 \strokec4 target\cf6 \strokec6 ;\cf4 \cb1 \strokec4 \
+\cb3     setInputs\cf6 \strokec6 (\cf4 \strokec4 prev \cf6 \strokec6 =>\cf4 \strokec4  \cf6 \strokec6 (\{\cf4 \cb1 \strokec4 \
+\cb3       \cf6 \strokec6 ...\cf4 \strokec4 prev\cf6 \strokec6 ,\cf4 \cb1 \strokec4 \
+\cb3       \cf6 \strokec6 [\cf4 \strokec4 name\cf6 \strokec6 ]:\cf4 \strokec4  \cf2 \strokec2 type\cf4 \strokec4  \cf6 \strokec6 ===\cf4 \strokec4  \cf7 \strokec7 'number'\cf4 \strokec4  \cf6 \strokec6 ?\cf4 \strokec4  parseFloat\cf6 \strokec6 (\cf4 \strokec4 value\cf6 \strokec6 )\cf4 \strokec4  \cf6 \strokec6 :\cf4 \strokec4  value\cf6 \strokec6 ,\cf4 \cb1 \strokec4 \
+\cb3     \cf6 \strokec6 \}));\cf4 \cb1 \strokec4 \
+\cb3   \cf6 \strokec6 \};\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf2 \strokec2 const\cf4 \strokec4  handleReset \cf6 \strokec6 =\cf4 \strokec4  \cf6 \strokec6 ()\cf4 \strokec4  \cf6 \strokec6 =>\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \cb1 \strokec4 \
+\cb3     setInputs\cf6 \strokec6 (\cf4 \strokec4 defaultInputs\cf6 \strokec6 );\cf4 \cb1 \strokec4 \
+\cb3   \cf6 \strokec6 \};\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf2 \strokec2 const\cf4 \strokec4  calculateSavings \cf6 \strokec6 =\cf4 \strokec4  \cf6 \strokec6 (\cf4 \strokec4 data\cf6 \strokec6 )\cf4 \strokec4  \cf6 \strokec6 =>\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 const\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \strokec4  fleetSize\cf6 \strokec6 ,\cf4 \strokec4  idleTime\cf6 \strokec6 ,\cf4 \strokec4  fuelPrice\cf6 \strokec6 ,\cf4 \strokec4  apuInstallationCost\cf6 \strokec6 ,\cf4 \strokec4  apuMaintenanceCost\cf6 \strokec6 ,\cf4 \strokec4  apuUsefulLife\cf6 \strokec6 ,\cf4 \strokec4  operatingDaysPerYear \cf6 \strokec6 \}\cf4 \strokec4  \cf6 \strokec6 =\cf4 \strokec4  data\cf6 \strokec6 ;\cf4 \cb1 \strokec4 \
+\
+\cb3     \cf2 \strokec2 const\cf4 \strokec4  fuelBurnRate \cf6 \strokec6 =\cf4 \strokec4  \cf8 \strokec8 0.8\cf6 \strokec6 ;\cf4 \strokec4  \cf9 \strokec9 // Hardcoded main engine fuel consumption\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 const\cf4 \strokec4  apuFuelBurnRate \cf6 \strokec6 =\cf4 \strokec4  \cf8 \strokec8 0.2\cf6 \strokec6 ;\cf4 \strokec4  \cf9 \strokec9 // Hardcoded APU fuel consumption\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 const\cf4 \strokec4  apuTime \cf6 \strokec6 =\cf4 \strokec4  idleTime \cf6 \strokec6 *\cf4 \strokec4  \cf8 \strokec8 0.8\cf6 \strokec6 ;\cf4 \strokec4  \cf9 \strokec9 // APU runs for half the time\cf4 \cb1 \strokec4 \
+\
+\cb3     \cf9 \strokec9 // Per Truck calculations\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 const\cf4 \strokec4  preApuCostPerTruck \cf6 \strokec6 =\cf4 \strokec4  idleTime \cf6 \strokec6 *\cf4 \strokec4  fuelBurnRate \cf6 \strokec6 *\cf4 \strokec4  fuelPrice \cf6 \strokec6 *\cf4 \strokec4  operatingDaysPerYear\cf6 \strokec6 ;\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 const\cf4 \strokec4  postApuCostPerTruck \cf6 \strokec6 =\cf4 \strokec4  apuTime \cf6 \strokec6 *\cf4 \strokec4  apuFuelBurnRate \cf6 \strokec6 *\cf4 \strokec4  fuelPrice \cf6 \strokec6 *\cf4 \strokec4  operatingDaysPerYear\cf6 \strokec6 ;\cf4 \cb1 \strokec4 \
+\
+\cb3     \cf9 \strokec9 // Total fleet calculations\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 const\cf4 \strokec4  preApuCostTotal \cf6 \strokec6 =\cf4 \strokec4  preApuCostPerTruck \cf6 \strokec6 *\cf4 \strokec4  fleetSize\cf6 \strokec6 ;\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 const\cf4 \strokec4  postApuCostTotal \cf6 \strokec6 =\cf4 \strokec4  postApuCostPerTruck \cf6 \strokec6 *\cf4 \strokec4  fleetSize\cf6 \strokec6 ;\cf4 \cb1 \strokec4 \
+\cb3     \cb1 \
+\cb3     \cf9 \strokec9 // Annual Fuel Savings (Total Fleet)\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 const\cf4 \strokec4  annualFuelSavingsTotal \cf6 \strokec6 =\cf4 \strokec4  preApuCostTotal \cf6 \strokec6 -\cf4 \strokec4  postApuCostTotal\cf6 \strokec6 ;\cf4 \cb1 \strokec4 \
+\cb3     \cb1 \
+\cb3     \cf9 \strokec9 // Annualized APU Cost (Maintenance only)\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 const\cf4 \strokec4  annualMaintenanceCostTotal \cf6 \strokec6 =\cf4 \strokec4  apuMaintenanceCost \cf6 \strokec6 *\cf4 \strokec4  fleetSize\cf6 \strokec6 ;\cf4 \cb1 \strokec4 \
+\
+\cb3     \cf9 \strokec9 // Total Initial Capital Cost\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 const\cf4 \strokec4  totalInitialCapitalCost \cf6 \strokec6 =\cf4 \strokec4  apuInstallationCost \cf6 \strokec6 *\cf4 \strokec4  fleetSize\cf6 \strokec6 ;\cf4 \cb1 \strokec4 \
+\
+\cb3     \cf9 \strokec9 // Total Net Benefit over APU life\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 const\cf4 \strokec4  totalNetBenefit \cf6 \strokec6 =\cf4 \strokec4  \cf6 \strokec6 (\cf4 \strokec4 annualFuelSavingsTotal \cf6 \strokec6 *\cf4 \strokec4  apuUsefulLife\cf6 \strokec6 )\cf4 \strokec4  \cf6 \strokec6 -\cf4 \strokec4  \cf6 \strokec6 (\cf4 \strokec4 annualMaintenanceCostTotal \cf6 \strokec6 *\cf4 \strokec4  apuUsefulLife\cf6 \strokec6 );\cf4 \cb1 \strokec4 \
+\
+\cb3     \cf9 \strokec9 // Net Annual Savings (Total Fleet)\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 const\cf4 \strokec4  netAnnualSavings \cf6 \strokec6 =\cf4 \strokec4  annualFuelSavingsTotal \cf6 \strokec6 -\cf4 \strokec4  annualMaintenanceCostTotal\cf6 \strokec6 ;\cf4 \cb1 \strokec4 \
+\
+\cb3     \cf9 \strokec9 // Payback Period\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 const\cf4 \strokec4  paybackYears \cf6 \strokec6 =\cf4 \strokec4  netAnnualSavings \cf6 \strokec6 >\cf4 \strokec4  \cf8 \strokec8 0\cf4 \strokec4  \cf6 \strokec6 ?\cf4 \strokec4  totalInitialCapitalCost \cf6 \strokec6 /\cf4 \strokec4  netAnnualSavings \cf6 \strokec6 :\cf4 \strokec4  \cf8 \strokec8 0\cf6 \strokec6 ;\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 const\cf4 \strokec4  paybackMonths \cf6 \strokec6 =\cf4 \strokec4  \cf5 \strokec5 Math\cf6 \strokec6 .\cf4 \strokec4 round\cf6 \strokec6 (\cf4 \strokec4 paybackYears \cf6 \strokec6 *\cf4 \strokec4  \cf8 \strokec8 12\cf6 \strokec6 );\cf4 \cb1 \strokec4 \
+\cb3     \cb1 \
+\cb3     \cf9 \strokec9 // The previous TCO calculation was incorrect. I've updated it to be more accurate.\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 const\cf4 \strokec4  totalApuLifeCost \cf6 \strokec6 =\cf4 \strokec4  \cf6 \strokec6 (\cf4 \strokec4 apuInstallationCost \cf6 \strokec6 +\cf4 \strokec4  \cf6 \strokec6 (\cf4 \strokec4 apuMaintenanceCost \cf6 \strokec6 *\cf4 \strokec4  apuUsefulLife\cf6 \strokec6 ))\cf4 \strokec4  \cf6 \strokec6 *\cf4 \strokec4  fleetSize\cf6 \strokec6 ;\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 const\cf4 \strokec4  totalApuLifeSavings \cf6 \strokec6 =\cf4 \strokec4  \cf6 \strokec6 (\cf4 \strokec4 preApuCostPerTruck \cf6 \strokec6 *\cf4 \strokec4  apuUsefulLife \cf6 \strokec6 *\cf4 \strokec4  fleetSize\cf6 \strokec6 )\cf4 \strokec4  \cf6 \strokec6 -\cf4 \strokec4  \cf6 \strokec6 (\cf4 \strokec4 postApuCostPerTruck \cf6 \strokec6 *\cf4 \strokec4  apuUsefulLife \cf6 \strokec6 *\cf4 \strokec4  fleetSize\cf6 \strokec6 );\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 const\cf4 \strokec4  totalNetBenefitOverLife \cf6 \strokec6 =\cf4 \strokec4  totalApuLifeSavings \cf6 \strokec6 -\cf4 \strokec4  \cf6 \strokec6 (\cf4 \strokec4 apuInstallationCost \cf6 \strokec6 *\cf4 \strokec4  fleetSize\cf6 \strokec6 )\cf4 \strokec4  \cf6 \strokec6 -\cf4 \strokec4  \cf6 \strokec6 (\cf4 \strokec4 apuMaintenanceCost \cf6 \strokec6 *\cf4 \strokec4  fleetSize \cf6 \strokec6 *\cf4 \strokec4  apuUsefulLife\cf6 \strokec6 );\cf4 \cb1 \strokec4 \
+\cb3     \cb1 \
+\
+\cb3     \cf9 \strokec9 // Cumulative Savings over APU life\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 const\cf4 \strokec4  cumulativeSavings \cf6 \strokec6 =\cf4 \strokec4  \cf6 \strokec6 [];\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 let\cf4 \strokec4  cumulativeNetSavings \cf6 \strokec6 =\cf4 \strokec4  \cf8 \strokec8 0\cf6 \strokec6 ;\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 for\cf4 \strokec4  \cf6 \strokec6 (\cf2 \strokec2 let\cf4 \strokec4  i \cf6 \strokec6 =\cf4 \strokec4  \cf8 \strokec8 1\cf6 \strokec6 ;\cf4 \strokec4  i \cf6 \strokec6 <=\cf4 \strokec4  apuUsefulLife\cf6 \strokec6 ;\cf4 \strokec4  i\cf6 \strokec6 ++)\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \cb1 \strokec4 \
+\cb3         cumulativeNetSavings \cf6 \strokec6 +=\cf4 \strokec4  netAnnualSavings\cf6 \strokec6 ;\cf4 \cb1 \strokec4 \
+\cb3         cumulativeSavings\cf6 \strokec6 .\cf4 \strokec4 push\cf6 \strokec6 (\{\cf4 \strokec4  year\cf6 \strokec6 :\cf4 \strokec4  \cf7 \strokec7 `Year \cf6 \strokec6 $\{\cf4 \strokec4 i\cf6 \strokec6 \}\cf7 \strokec7 `\cf6 \strokec6 ,\cf4 \strokec4  savings\cf6 \strokec6 :\cf4 \strokec4  cumulativeNetSavings \cf6 \strokec6 \});\cf4 \cb1 \strokec4 \
+\cb3     \cf6 \strokec6 \}\cf4 \cb1 \strokec4 \
+\
+\cb3     \cf9 \strokec9 // This calculation is for the Annual Cost-Benefit Breakdown chart\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 const\cf4 \strokec4  annualizedApuCostPerYear \cf6 \strokec6 =\cf4 \strokec4  \cf6 \strokec6 (\cf4 \strokec4 totalInitialCapitalCost \cf6 \strokec6 /\cf4 \strokec4  apuUsefulLife\cf6 \strokec6 )\cf4 \strokec4  \cf6 \strokec6 +\cf4 \strokec4  annualMaintenanceCostTotal\cf6 \strokec6 ;\cf4 \cb1 \strokec4 \
+\
+\cb3     \cf2 \strokec2 return\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \cb1 \strokec4 \
+\cb3       preApuCostPerTruck\cf6 \strokec6 ,\cf4 \cb1 \strokec4 \
+\cb3       preApuCostTotal\cf6 \strokec6 ,\cf4 \cb1 \strokec4 \
+\cb3       postApuCostPerTruck\cf6 \strokec6 ,\cf4 \cb1 \strokec4 \
+\cb3       postApuCostTotal\cf6 \strokec6 ,\cf4 \cb1 \strokec4 \
+\cb3       annualFuelSavingsTotal\cf6 \strokec6 ,\cf4 \cb1 \strokec4 \
+\cb3       annualMaintenanceCostTotal\cf6 \strokec6 :\cf4 \strokec4  annualMaintenanceCostTotal\cf6 \strokec6 ,\cf4 \cb1 \strokec4 \
+\cb3       netAnnualSavings\cf6 \strokec6 ,\cf4 \cb1 \strokec4 \
+\cb3       paybackYears\cf6 \strokec6 ,\cf4 \cb1 \strokec4 \
+\cb3       paybackMonths\cf6 \strokec6 ,\cf4 \cb1 \strokec4 \
+\cb3       cumulativeSavings\cf6 \strokec6 ,\cf4 \cb1 \strokec4 \
+\cb3       totalInitialCapitalCost\cf6 \strokec6 ,\cf4 \cb1 \strokec4 \
+\cb3       totalNetBenefit\cf6 \strokec6 :\cf4 \strokec4  totalNetBenefitOverLife\cf6 \strokec6 ,\cf4 \cb1 \strokec4 \
+\cb3       annualizedApuCostPerYear\cb1 \
+\cb3     \cf6 \strokec6 \};\cf4 \cb1 \strokec4 \
+\cb3   \cf6 \strokec6 \};\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf2 \strokec2 const\cf4 \strokec4  updateChart1 \cf6 \strokec6 =\cf4 \strokec4  \cf6 \strokec6 ()\cf4 \strokec4  \cf6 \strokec6 =>\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 if\cf4 \strokec4  \cf6 \strokec6 (\cf4 \strokec4 chart1Instance\cf6 \strokec6 .\cf4 \strokec4 current\cf6 \strokec6 )\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \cb1 \strokec4 \
+\cb3       chart1Instance\cf6 \strokec6 .\cf4 \strokec4 current\cf6 \strokec6 .\cf4 \strokec4 destroy\cf6 \strokec6 ();\cf4 \cb1 \strokec4 \
+\cb3     \cf6 \strokec6 \}\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 const\cf4 \strokec4  ctx \cf6 \strokec6 =\cf4 \strokec4  chart1Ref\cf6 \strokec6 .\cf4 \strokec4 current\cf6 \strokec6 .\cf4 \strokec4 getContext\cf6 \strokec6 (\cf7 \strokec7 '2d'\cf6 \strokec6 );\cf4 \cb1 \strokec4 \
+\cb3     chart1Instance\cf6 \strokec6 .\cf4 \strokec4 current \cf6 \strokec6 =\cf4 \strokec4  \cf2 \strokec2 new\cf4 \strokec4  \cf5 \strokec5 Chart\cf6 \strokec6 (\cf4 \strokec4 ctx\cf6 \strokec6 ,\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \cb1 \strokec4 \
+\cb3       \cf2 \strokec2 type\cf6 \strokec6 :\cf4 \strokec4  \cf7 \strokec7 'bar'\cf6 \strokec6 ,\cf4 \cb1 \strokec4 \
+\cb3       data\cf6 \strokec6 :\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \cb1 \strokec4 \
+\cb3         labels\cf6 \strokec6 :\cf4 \strokec4  \cf6 \strokec6 [\cf7 \strokec7 'Pre-APU Cost'\cf6 \strokec6 ,\cf4 \strokec4  \cf7 \strokec7 'Post-APU Cost'\cf6 \strokec6 ],\cf4 \cb1 \strokec4 \
+\cb3         datasets\cf6 \strokec6 :\cf4 \strokec4  \cf6 \strokec6 [\{\cf4 \cb1 \strokec4 \
+\cb3           label\cf6 \strokec6 :\cf4 \strokec4  \cf7 \strokec7 'Cost'\cf6 \strokec6 ,\cf4 \cb1 \strokec4 \
+\cb3           data\cf6 \strokec6 :\cf4 \strokec4  \cf6 \strokec6 [\cf4 \strokec4 results\cf6 \strokec6 .\cf4 \strokec4 preApuCostTotal\cf6 \strokec6 ,\cf4 \strokec4  results\cf6 \strokec6 .\cf4 \strokec4 postApuCostTotal\cf6 \strokec6 ],\cf4 \cb1 \strokec4 \
+\cb3           backgroundColor\cf6 \strokec6 :\cf4 \strokec4  \cf6 \strokec6 [\cf4 \strokec4 colors\cf6 \strokec6 .\cf4 \strokec4 negative\cf6 \strokec6 ,\cf4 \strokec4  colors\cf6 \strokec6 .\cf4 \strokec4 positive\cf6 \strokec6 ],\cf4 \cb1 \strokec4 \
+\cb3         \cf6 \strokec6 \}],\cf4 \cb1 \strokec4 \
+\cb3       \cf6 \strokec6 \},\cf4 \cb1 \strokec4 \
+\cb3       options\cf6 \strokec6 :\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \cb1 \strokec4 \
+\cb3         responsive\cf6 \strokec6 :\cf4 \strokec4  \cf2 \strokec2 true\cf6 \strokec6 ,\cf4 \cb1 \strokec4 \
+\cb3         plugins\cf6 \strokec6 :\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \cb1 \strokec4 \
+\cb3           legend\cf6 \strokec6 :\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \strokec4  display\cf6 \strokec6 :\cf4 \strokec4  \cf2 \strokec2 false\cf4 \strokec4  \cf6 \strokec6 \},\cf4 \cb1 \strokec4 \
+\cb3           title\cf6 \strokec6 :\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \strokec4  display\cf6 \strokec6 :\cf4 \strokec4  \cf2 \strokec2 true\cf6 \strokec6 ,\cf4 \strokec4  text\cf6 \strokec6 :\cf4 \strokec4  \cf7 \strokec7 'Annual Idling Cost Comparison'\cf6 \strokec6 ,\cf4 \strokec4  font\cf6 \strokec6 :\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \strokec4  size\cf6 \strokec6 :\cf4 \strokec4  \cf8 \strokec8 15\cf6 \strokec6 ,\cf4 \strokec4  family\cf6 \strokec6 :\cf4 \strokec4  \cf7 \strokec7 'Inter'\cf4 \strokec4  \cf6 \strokec6 \},\cf4 \strokec4  color\cf6 \strokec6 :\cf4 \strokec4  \cf7 \strokec7 'white'\cf4 \strokec4  \cf6 \strokec6 \},\cf4 \cb1 \strokec4 \
+\cb3         \cf6 \strokec6 \},\cf4 \cb1 \strokec4 \
+\cb3         scales\cf6 \strokec6 :\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \cb1 \strokec4 \
+\cb3           y\cf6 \strokec6 :\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \strokec4  beginAtZero\cf6 \strokec6 :\cf4 \strokec4  \cf2 \strokec2 true\cf6 \strokec6 ,\cf4 \strokec4  grid\cf6 \strokec6 :\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \strokec4  display\cf6 \strokec6 :\cf4 \strokec4  \cf2 \strokec2 false\cf6 \strokec6 ,\cf4 \strokec4  color\cf6 \strokec6 :\cf4 \strokec4  \cf7 \strokec7 '#4a5568'\cf4 \strokec4  \cf6 \strokec6 \},\cf4 \strokec4  ticks\cf6 \strokec6 :\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \strokec4  color\cf6 \strokec6 :\cf4 \strokec4  \cf7 \strokec7 'white'\cf6 \strokec6 ,\cf4 \strokec4  font\cf6 \strokec6 :\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \strokec4  family\cf6 \strokec6 :\cf4 \strokec4  \cf7 \strokec7 'Inter'\cf4 \strokec4  \cf6 \strokec6 \}\cf4 \strokec4  \cf6 \strokec6 \}\cf4 \strokec4  \cf6 \strokec6 \},\cf4 \cb1 \strokec4 \
+\cb3           x\cf6 \strokec6 :\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \strokec4  grid\cf6 \strokec6 :\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \strokec4  display\cf6 \strokec6 :\cf4 \strokec4  \cf2 \strokec2 false\cf4 \strokec4  \cf6 \strokec6 \},\cf4 \strokec4  ticks\cf6 \strokec6 :\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \strokec4  color\cf6 \strokec6 :\cf4 \strokec4  \cf7 \strokec7 'white'\cf6 \strokec6 ,\cf4 \strokec4  font\cf6 \strokec6 :\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \strokec4  family\cf6 \strokec6 :\cf4 \strokec4  \cf7 \strokec7 'Inter'\cf4 \strokec4  \cf6 \strokec6 \}\cf4 \strokec4  \cf6 \strokec6 \}\cf4 \strokec4  \cf6 \strokec6 \},\cf4 \cb1 \strokec4 \
+\cb3         \cf6 \strokec6 \},\cf4 \cb1 \strokec4 \
+\cb3       \cf6 \strokec6 \},\cf4 \cb1 \strokec4 \
+\cb3     \cf6 \strokec6 \});\cf4 \cb1 \strokec4 \
+\cb3   \cf6 \strokec6 \};\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf2 \strokec2 const\cf4 \strokec4  updateChart2 \cf6 \strokec6 =\cf4 \strokec4  \cf6 \strokec6 ()\cf4 \strokec4  \cf6 \strokec6 =>\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 if\cf4 \strokec4  \cf6 \strokec6 (\cf4 \strokec4 chart2Instance\cf6 \strokec6 .\cf4 \strokec4 current\cf6 \strokec6 )\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \cb1 \strokec4 \
+\cb3       chart2Instance\cf6 \strokec6 .\cf4 \strokec4 current\cf6 \strokec6 .\cf4 \strokec4 destroy\cf6 \strokec6 ();\cf4 \cb1 \strokec4 \
+\cb3     \cf6 \strokec6 \}\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 const\cf4 \strokec4  ctx \cf6 \strokec6 =\cf4 \strokec4  chart2Ref\cf6 \strokec6 .\cf4 \strokec4 current\cf6 \strokec6 .\cf4 \strokec4 getContext\cf6 \strokec6 (\cf7 \strokec7 '2d'\cf6 \strokec6 );\cf4 \cb1 \strokec4 \
+\cb3     chart2Instance\cf6 \strokec6 .\cf4 \strokec4 current \cf6 \strokec6 =\cf4 \strokec4  \cf2 \strokec2 new\cf4 \strokec4  \cf5 \strokec5 Chart\cf6 \strokec6 (\cf4 \strokec4 ctx\cf6 \strokec6 ,\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \cb1 \strokec4 \
+\cb3       \cf2 \strokec2 type\cf6 \strokec6 :\cf4 \strokec4  \cf7 \strokec7 'line'\cf6 \strokec6 ,\cf4 \cb1 \strokec4 \
+\cb3       data\cf6 \strokec6 :\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \cb1 \strokec4 \
+\cb3         labels\cf6 \strokec6 :\cf4 \strokec4  results\cf6 \strokec6 .\cf4 \strokec4 cumulativeSavings\cf6 \strokec6 .\cf4 \strokec4 map\cf6 \strokec6 (\cf4 \strokec4 s \cf6 \strokec6 =>\cf4 \strokec4  s\cf6 \strokec6 .\cf4 \strokec4 year\cf6 \strokec6 ),\cf4 \cb1 \strokec4 \
+\cb3         datasets\cf6 \strokec6 :\cf4 \strokec4  \cf6 \strokec6 [\{\cf4 \cb1 \strokec4 \
+\cb3           label\cf6 \strokec6 :\cf4 \strokec4  \cf7 \strokec7 'Cumulative Net Savings'\cf6 \strokec6 ,\cf4 \cb1 \strokec4 \
+\cb3           data\cf6 \strokec6 :\cf4 \strokec4  results\cf6 \strokec6 .\cf4 \strokec4 cumulativeSavings\cf6 \strokec6 .\cf4 \strokec4 map\cf6 \strokec6 (\cf4 \strokec4 s \cf6 \strokec6 =>\cf4 \strokec4  s\cf6 \strokec6 .\cf4 \strokec4 savings\cf6 \strokec6 ),\cf4 \cb1 \strokec4 \
+\cb3           borderColor\cf6 \strokec6 :\cf4 \strokec4  colors\cf6 \strokec6 .\cf4 \strokec4 positive\cf6 \strokec6 ,\cf4 \cb1 \strokec4 \
+\cb3           backgroundColor\cf6 \strokec6 :\cf4 \strokec4  \cf7 \strokec7 'rgba(53, 206, 141, 0.2)'\cf6 \strokec6 ,\cf4 \cb1 \strokec4 \
+\cb3           fill\cf6 \strokec6 :\cf4 \strokec4  \cf2 \strokec2 true\cf6 \strokec6 ,\cf4 \cb1 \strokec4 \
+\cb3           tension\cf6 \strokec6 :\cf4 \strokec4  \cf8 \strokec8 0.4\cf6 \strokec6 ,\cf4 \cb1 \strokec4 \
+\cb3         \cf6 \strokec6 \}],\cf4 \cb1 \strokec4 \
+\cb3       \cf6 \strokec6 \},\cf4 \cb1 \strokec4 \
+\cb3       options\cf6 \strokec6 :\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \cb1 \strokec4 \
+\cb3         responsive\cf6 \strokec6 :\cf4 \strokec4  \cf2 \strokec2 true\cf6 \strokec6 ,\cf4 \cb1 \strokec4 \
+\cb3         plugins\cf6 \strokec6 :\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \cb1 \strokec4 \
+\cb3           legend\cf6 \strokec6 :\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \strokec4  display\cf6 \strokec6 :\cf4 \strokec4  \cf2 \strokec2 false\cf4 \strokec4  \cf6 \strokec6 \},\cf4 \cb1 \strokec4 \
+\cb3           title\cf6 \strokec6 :\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \strokec4  display\cf6 \strokec6 :\cf4 \strokec4  \cf2 \strokec2 true\cf6 \strokec6 ,\cf4 \strokec4  text\cf6 \strokec6 :\cf4 \strokec4  \cf7 \strokec7 'Cumulative Net Savings Over APU Life'\cf6 \strokec6 ,\cf4 \strokec4  font\cf6 \strokec6 :\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \strokec4  size\cf6 \strokec6 :\cf4 \strokec4  \cf8 \strokec8 15\cf6 \strokec6 ,\cf4 \strokec4  family\cf6 \strokec6 :\cf4 \strokec4  \cf7 \strokec7 'Inter'\cf4 \strokec4  \cf6 \strokec6 \},\cf4 \strokec4  color\cf6 \strokec6 :\cf4 \strokec4  \cf7 \strokec7 'white'\cf4 \strokec4  \cf6 \strokec6 \},\cf4 \cb1 \strokec4 \
+\cb3         \cf6 \strokec6 \},\cf4 \cb1 \strokec4 \
+\cb3         scales\cf6 \strokec6 :\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \cb1 \strokec4 \
+\cb3           y\cf6 \strokec6 :\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \strokec4  beginAtZero\cf6 \strokec6 :\cf4 \strokec4  \cf2 \strokec2 true\cf6 \strokec6 ,\cf4 \strokec4  grid\cf6 \strokec6 :\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \strokec4  display\cf6 \strokec6 :\cf4 \strokec4  \cf2 \strokec2 false\cf6 \strokec6 ,\cf4 \strokec4  color\cf6 \strokec6 :\cf4 \strokec4  \cf7 \strokec7 '#4a5568'\cf4 \strokec4  \cf6 \strokec6 \},\cf4 \strokec4  ticks\cf6 \strokec6 :\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \strokec4  color\cf6 \strokec6 :\cf4 \strokec4  \cf7 \strokec7 'white'\cf6 \strokec6 ,\cf4 \strokec4  font\cf6 \strokec6 :\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \strokec4  family\cf6 \strokec6 :\cf4 \strokec4  \cf7 \strokec7 'Inter'\cf4 \strokec4  \cf6 \strokec6 \}\cf4 \strokec4  \cf6 \strokec6 \}\cf4 \strokec4  \cf6 \strokec6 \},\cf4 \cb1 \strokec4 \
+\cb3           x\cf6 \strokec6 :\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \strokec4  grid\cf6 \strokec6 :\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \strokec4  display\cf6 \strokec6 :\cf4 \strokec4  \cf2 \strokec2 false\cf4 \strokec4  \cf6 \strokec6 \},\cf4 \strokec4  ticks\cf6 \strokec6 :\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \strokec4  color\cf6 \strokec6 :\cf4 \strokec4  \cf7 \strokec7 'white'\cf6 \strokec6 ,\cf4 \strokec4  font\cf6 \strokec6 :\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \strokec4  family\cf6 \strokec6 :\cf4 \strokec4  \cf7 \strokec7 'Inter'\cf4 \strokec4  \cf6 \strokec6 \}\cf4 \strokec4  \cf6 \strokec6 \}\cf4 \strokec4  \cf6 \strokec6 \},\cf4 \cb1 \strokec4 \
+\cb3         \cf6 \strokec6 \},\cf4 \cb1 \strokec4 \
+\cb3       \cf6 \strokec6 \},\cf4 \cb1 \strokec4 \
+\cb3     \cf6 \strokec6 \});\cf4 \cb1 \strokec4 \
+\cb3   \cf6 \strokec6 \};\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf2 \strokec2 const\cf4 \strokec4  updateChart3 \cf6 \strokec6 =\cf4 \strokec4  \cf6 \strokec6 ()\cf4 \strokec4  \cf6 \strokec6 =>\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 if\cf4 \strokec4  \cf6 \strokec6 (\cf4 \strokec4 chart3Instance\cf6 \strokec6 .\cf4 \strokec4 current\cf6 \strokec6 )\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \cb1 \strokec4 \
+\cb3       chart3Instance\cf6 \strokec6 .\cf4 \strokec4 current\cf6 \strokec6 .\cf4 \strokec4 destroy\cf6 \strokec6 ();\cf4 \cb1 \strokec4 \
+\cb3     \cf6 \strokec6 \}\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 const\cf4 \strokec4  ctx \cf6 \strokec6 =\cf4 \strokec4  chart3Ref\cf6 \strokec6 .\cf4 \strokec4 current\cf6 \strokec6 .\cf4 \strokec4 getContext\cf6 \strokec6 (\cf7 \strokec7 '2d'\cf6 \strokec6 );\cf4 \cb1 \strokec4 \
+\cb3     chart3Instance\cf6 \strokec6 .\cf4 \strokec4 current \cf6 \strokec6 =\cf4 \strokec4  \cf2 \strokec2 new\cf4 \strokec4  \cf5 \strokec5 Chart\cf6 \strokec6 (\cf4 \strokec4 ctx\cf6 \strokec6 ,\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \cb1 \strokec4 \
+\cb3       \cf2 \strokec2 type\cf6 \strokec6 :\cf4 \strokec4  \cf7 \strokec7 'bar'\cf6 \strokec6 ,\cf4 \cb1 \strokec4 \
+\cb3       data\cf6 \strokec6 :\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \cb1 \strokec4 \
+\cb3         labels\cf6 \strokec6 :\cf4 \strokec4  \cf6 \strokec6 [\cf7 \strokec7 'Annual Fuel Savings'\cf6 \strokec6 ,\cf4 \strokec4  \cf7 \strokec7 'Annual Maintenance'\cf6 \strokec6 ],\cf4 \cb1 \strokec4 \
+\cb3         datasets\cf6 \strokec6 :\cf4 \strokec4  \cf6 \strokec6 [\{\cf4 \cb1 \strokec4 \
+\cb3           label\cf6 \strokec6 :\cf4 \strokec4  \cf7 \strokec7 'Cost'\cf6 \strokec6 ,\cf4 \cb1 \strokec4 \
+\cb3           data\cf6 \strokec6 :\cf4 \strokec4  \cf6 \strokec6 [\cf4 \strokec4 results\cf6 \strokec6 .\cf4 \strokec4 annualFuelSavingsTotal\cf6 \strokec6 ,\cf4 \strokec4  results\cf6 \strokec6 .\cf4 \strokec4 annualMaintenanceCostTotal\cf6 \strokec6 ],\cf4 \cb1 \strokec4 \
+\cb3           backgroundColor\cf6 \strokec6 :\cf4 \strokec4  \cf6 \strokec6 [\cf4 \strokec4 colors\cf6 \strokec6 .\cf4 \strokec4 positive\cf6 \strokec6 ,\cf4 \strokec4  colors\cf6 \strokec6 .\cf4 \strokec4 negative\cf6 \strokec6 ],\cf4 \cb1 \strokec4 \
+\cb3         \cf6 \strokec6 \}],\cf4 \cb1 \strokec4 \
+\cb3       \cf6 \strokec6 \},\cf4 \cb1 \strokec4 \
+\cb3       options\cf6 \strokec6 :\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \cb1 \strokec4 \
+\cb3         indexAxis\cf6 \strokec6 :\cf4 \strokec4  \cf7 \strokec7 'y'\cf6 \strokec6 ,\cf4 \cb1 \strokec4 \
+\cb3         responsive\cf6 \strokec6 :\cf4 \strokec4  \cf2 \strokec2 true\cf6 \strokec6 ,\cf4 \cb1 \strokec4 \
+\cb3         plugins\cf6 \strokec6 :\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \cb1 \strokec4 \
+\cb3           legend\cf6 \strokec6 :\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \strokec4  display\cf6 \strokec6 :\cf4 \strokec4  \cf2 \strokec2 false\cf4 \strokec4  \cf6 \strokec6 \},\cf4 \cb1 \strokec4 \
+\cb3           title\cf6 \strokec6 :\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \strokec4  display\cf6 \strokec6 :\cf4 \strokec4  \cf2 \strokec2 true\cf6 \strokec6 ,\cf4 \strokec4  text\cf6 \strokec6 :\cf4 \strokec4  \cf7 \strokec7 'Annual Cost-Benefit Breakdown'\cf6 \strokec6 ,\cf4 \strokec4  font\cf6 \strokec6 :\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \strokec4  size\cf6 \strokec6 :\cf4 \strokec4  \cf8 \strokec8 15\cf6 \strokec6 ,\cf4 \strokec4  family\cf6 \strokec6 :\cf4 \strokec4  \cf7 \strokec7 'Inter'\cf4 \strokec4  \cf6 \strokec6 \},\cf4 \strokec4  color\cf6 \strokec6 :\cf4 \strokec4  \cf7 \strokec7 'white'\cf4 \strokec4  \cf6 \strokec6 \},\cf4 \cb1 \strokec4 \
+\cb3         \cf6 \strokec6 \},\cf4 \cb1 \strokec4 \
+\cb3         scales\cf6 \strokec6 :\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \cb1 \strokec4 \
+\cb3           y\cf6 \strokec6 :\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \strokec4  beginAtZero\cf6 \strokec6 :\cf4 \strokec4  \cf2 \strokec2 true\cf6 \strokec6 ,\cf4 \strokec4  grid\cf6 \strokec6 :\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \strokec4  display\cf6 \strokec6 :\cf4 \strokec4  \cf2 \strokec2 false\cf4 \strokec4  \cf6 \strokec6 \},\cf4 \strokec4  ticks\cf6 \strokec6 :\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \strokec4  color\cf6 \strokec6 :\cf4 \strokec4  \cf7 \strokec7 'white'\cf6 \strokec6 ,\cf4 \strokec4  font\cf6 \strokec6 :\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \strokec4  family\cf6 \strokec6 :\cf4 \strokec4  \cf7 \strokec7 'Inter'\cf4 \strokec4  \cf6 \strokec6 \}\cf4 \strokec4  \cf6 \strokec6 \}\cf4 \strokec4  \cf6 \strokec6 \},\cf4 \cb1 \strokec4 \
+\cb3           x\cf6 \strokec6 :\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \strokec4  beginAtZero\cf6 \strokec6 :\cf4 \strokec4  \cf2 \strokec2 true\cf6 \strokec6 ,\cf4 \strokec4  grid\cf6 \strokec6 :\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \strokec4  display\cf6 \strokec6 :\cf4 \strokec4  \cf2 \strokec2 false\cf6 \strokec6 ,\cf4 \strokec4  color\cf6 \strokec6 :\cf4 \strokec4  \cf7 \strokec7 '#4a5568'\cf4 \strokec4  \cf6 \strokec6 \},\cf4 \strokec4  ticks\cf6 \strokec6 :\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \strokec4  color\cf6 \strokec6 :\cf4 \strokec4  \cf7 \strokec7 'white'\cf6 \strokec6 ,\cf4 \strokec4  font\cf6 \strokec6 :\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \strokec4  family\cf6 \strokec6 :\cf4 \strokec4  \cf7 \strokec7 'Inter'\cf4 \strokec4  \cf6 \strokec6 \}\cf4 \strokec4  \cf6 \strokec6 \}\cf4 \strokec4  \cf6 \strokec6 \},\cf4 \cb1 \strokec4 \
+\cb3         \cf6 \strokec6 \},\cf4 \cb1 \strokec4 \
+\cb3       \cf6 \strokec6 \},\cf4 \cb1 \strokec4 \
+\cb3     \cf6 \strokec6 \});\cf4 \cb1 \strokec4 \
+\cb3   \cf6 \strokec6 \};\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf2 \strokec2 if\cf4 \strokec4  \cf6 \strokec6 (!\cf4 \strokec4 results\cf6 \strokec6 )\cf4 \strokec4  \cf2 \strokec2 return\cf4 \strokec4  \cf2 \strokec2 null\cf6 \strokec6 ;\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf2 \strokec2 const\cf4 \strokec4  createSummaryParagraph \cf6 \strokec6 =\cf4 \strokec4  \cf6 \strokec6 (\cf4 \strokec4 numTrucks\cf6 \strokec6 ,\cf4 \strokec4  netAnnualSavings\cf6 \strokec6 ,\cf4 \strokec4  apuInstallationCost\cf6 \strokec6 ,\cf4 \strokec4  paybackMonths\cf6 \strokec6 )\cf4 \strokec4  \cf6 \strokec6 =>\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 const\cf4 \strokec4  totalPurchasePrice \cf6 \strokec6 =\cf4 \strokec4  apuInstallationCost \cf6 \strokec6 *\cf4 \strokec4  numTrucks\cf6 \strokec6 ;\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 let\cf4 \strokec4  savingsText \cf6 \strokec6 =\cf4 \strokec4  \cf7 \strokec7 `By adopting APUs across <span class="font-bold">\cf6 \strokec6 $\{\cf4 \strokec4 numTrucks\cf6 \strokec6 \}\cf7 \strokec7  trucks</span>, you could achieve net annual fuel cost savings of <span class="font-bold">\cf10 \strokec10 $\cf6 \strokec6 $\{\cf5 \strokec5 Math\cf6 \strokec6 .\cf4 \strokec4 round\cf6 \strokec6 (\cf4 \strokec4 netAnnualSavings\cf6 \strokec6 ).\cf4 \strokec4 toLocaleString\cf6 \strokec6 (\cf7 \strokec7 'en-US'\cf6 \strokec6 )\}\cf7 \strokec7 </span>.`\cf6 \strokec6 ;\cf4 \cb1 \strokec4 \
+\cb3     \cb1 \
+\cb3     \cf2 \strokec2 let\cf4 \strokec4  paybackText\cf6 \strokec6 ;\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 if\cf4 \strokec4  \cf6 \strokec6 (\cf4 \strokec4 paybackMonths \cf6 \strokec6 <\cf4 \strokec4  \cf8 \strokec8 1\cf6 \strokec6 )\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \cb1 \strokec4 \
+\cb3         paybackText \cf6 \strokec6 =\cf4 \strokec4  \cf7 \strokec7 `The initial investment of <span class="font-bold">\cf10 \strokec10 $\cf6 \strokec6 $\{\cf5 \strokec5 Math\cf6 \strokec6 .\cf4 \strokec4 round\cf6 \strokec6 (\cf4 \strokec4 totalPurchasePrice\cf6 \strokec6 ).\cf4 \strokec4 toLocaleString\cf6 \strokec6 (\cf7 \strokec7 'en-US'\cf6 \strokec6 )\}\cf7 \strokec7 </span> has a very quick payback period of less than <span class="font-bold">one month</span>.`\cf6 \strokec6 ;\cf4 \cb1 \strokec4 \
+\cb3     \cf6 \strokec6 \}\cf4 \strokec4  \cf2 \strokec2 else\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \cb1 \strokec4 \
+\cb3         \cf2 \strokec2 const\cf4 \strokec4  years \cf6 \strokec6 =\cf4 \strokec4  \cf5 \strokec5 Math\cf6 \strokec6 .\cf4 \strokec4 floor\cf6 \strokec6 (\cf4 \strokec4 paybackMonths \cf6 \strokec6 /\cf4 \strokec4  \cf8 \strokec8 12\cf6 \strokec6 );\cf4 \cb1 \strokec4 \
+\cb3         \cf2 \strokec2 const\cf4 \strokec4  months \cf6 \strokec6 =\cf4 \strokec4  paybackMonths \cf6 \strokec6 %\cf4 \strokec4  \cf8 \strokec8 12\cf6 \strokec6 ;\cf4 \cb1 \strokec4 \
+\cb3         \cf2 \strokec2 let\cf4 \strokec4  paybackString \cf6 \strokec6 =\cf4 \strokec4  \cf7 \strokec7 ''\cf6 \strokec6 ;\cf4 \cb1 \strokec4 \
+\cb3         \cf2 \strokec2 if\cf4 \strokec4  \cf6 \strokec6 (\cf4 \strokec4 years \cf6 \strokec6 >\cf4 \strokec4  \cf8 \strokec8 0\cf6 \strokec6 )\cf4 \strokec4  paybackString \cf6 \strokec6 +=\cf4 \strokec4  \cf7 \strokec7 `\cf6 \strokec6 $\{\cf4 \strokec4 years\cf6 \strokec6 \}\cf7 \strokec7  year\cf6 \strokec6 $\{\cf4 \strokec4 years \cf6 \strokec6 >\cf4 \strokec4  \cf8 \strokec8 1\cf4 \strokec4  \cf6 \strokec6 ?\cf4 \strokec4  \cf7 \strokec7 's'\cf4 \strokec4  \cf6 \strokec6 :\cf4 \strokec4  \cf7 \strokec7 ''\cf6 \strokec6 \}\cf7 \strokec7 `\cf6 \strokec6 ;\cf4 \cb1 \strokec4 \
+\cb3         \cf2 \strokec2 if\cf4 \strokec4  \cf6 \strokec6 (\cf4 \strokec4 months \cf6 \strokec6 >\cf4 \strokec4  \cf8 \strokec8 0\cf6 \strokec6 )\cf4 \strokec4  paybackString \cf6 \strokec6 +=\cf4 \strokec4  \cf7 \strokec7 `\cf6 \strokec6 $\{\cf4 \strokec4 years \cf6 \strokec6 >\cf4 \strokec4  \cf8 \strokec8 0\cf4 \strokec4  \cf6 \strokec6 ?\cf4 \strokec4  \cf7 \strokec7 ' and '\cf4 \strokec4  \cf6 \strokec6 :\cf4 \strokec4  \cf7 \strokec7 ''\cf6 \strokec6 \}$\{\cf4 \strokec4 months\cf6 \strokec6 \}\cf7 \strokec7  month\cf6 \strokec6 $\{\cf4 \strokec4 months \cf6 \strokec6 >\cf4 \strokec4  \cf8 \strokec8 1\cf4 \strokec4  \cf6 \strokec6 ?\cf4 \strokec4  \cf7 \strokec7 's'\cf4 \strokec4  \cf6 \strokec6 :\cf4 \strokec4  \cf7 \strokec7 ''\cf6 \strokec6 \}\cf7 \strokec7 `\cf6 \strokec6 ;\cf4 \cb1 \strokec4 \
+\cb3         \cb1 \
+\cb3         paybackText \cf6 \strokec6 =\cf4 \strokec4  \cf7 \strokec7 `The initial investment of <span class="font-bold">\cf10 \strokec10 $\cf6 \strokec6 $\{\cf5 \strokec5 Math\cf6 \strokec6 .\cf4 \strokec4 round\cf6 \strokec6 (\cf4 \strokec4 totalPurchasePrice\cf6 \strokec6 ).\cf4 \strokec4 toLocaleString\cf6 \strokec6 (\cf7 \strokec7 'en-US'\cf6 \strokec6 )\}\cf7 \strokec7 </span> has a projected payback period of approximately <span class="font-bold">\cf6 \strokec6 $\{\cf4 \strokec4 paybackString\cf6 \strokec6 \}\cf7 \strokec7 </span>.`\cf6 \strokec6 ;\cf4 \cb1 \strokec4 \
+\cb3     \cf6 \strokec6 \}\cf4 \cb1 \strokec4 \
+\
+\cb3     \cf2 \strokec2 if\cf4 \strokec4  \cf6 \strokec6 (\cf4 \strokec4 netAnnualSavings \cf6 \strokec6 <=\cf4 \strokec4  \cf8 \strokec8 0\cf6 \strokec6 )\cf4 \strokec4  \cf6 \strokec6 \{\cf4 \cb1 \strokec4 \
+\cb3         paybackText \cf6 \strokec6 =\cf4 \strokec4  \cf7 \strokec7 `The initial investment of <span class="font-bold">\cf10 \strokec10 $\cf6 \strokec6 $\{\cf5 \strokec5 Math\cf6 \strokec6 .\cf4 \strokec4 round\cf6 \strokec6 (\cf4 \strokec4 totalPurchasePrice\cf6 \strokec6 ).\cf4 \strokec4 toLocaleString\cf6 \strokec6 (\cf7 \strokec7 'en-US'\cf6 \strokec6 )\}\cf7 \strokec7 </span> is not financially viable at this time.`\cf6 \strokec6 ;\cf4 \cb1 \strokec4 \
+\cb3     \cf6 \strokec6 \}\cf4 \cb1 \strokec4 \
+\cb3     \cb1 \
+\cb3     \cf2 \strokec2 return\cf4 \strokec4  \cf7 \strokec7 `\cf6 \strokec6 $\{\cf4 \strokec4 savingsText\cf6 \strokec6 \}\cf7 \strokec7  \cf6 \strokec6 $\{\cf4 \strokec4 paybackText\cf6 \strokec6 \}\cf7 \strokec7 `\cf6 \strokec6 ;\cf4 \cb1 \strokec4 \
+\cb3   \cf6 \strokec6 \};\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf2 \strokec2 return\cf4 \strokec4  \cf6 \strokec6 (\cf4 \cb1 \strokec4 \
+\cb3     \cf6 \strokec6 <\cf4 \strokec4 div className\cf6 \strokec6 =\cf7 \strokec7 "bg-gray-900 text-white min-h-screen p-8"\cf4 \strokec4  style\cf6 \strokec6 =\{\{\cf4 \strokec4  fontFamily\cf6 \strokec6 :\cf4 \strokec4  \cf7 \strokec7 'Inter, sans-serif'\cf4 \strokec4  \cf6 \strokec6 \}\}>\cf4 \cb1 \strokec4 \
+\cb3       \cf6 \strokec6 \{\cf9 \strokec9 /* Header Section */\cf6 \strokec6 \}\cf4 \cb1 \strokec4 \
+\cb3       \cf6 \strokec6 <\cf4 \strokec4 div className\cf6 \strokec6 =\cf7 \strokec7 "text-center mb-10"\cf6 \strokec6 >\cf4 \cb1 \strokec4 \
+\cb3         \cf6 \strokec6 <\cf4 \strokec4 h1 className\cf6 \strokec6 =\cf7 \strokec7 "text-4xl font-bold text-white"\cf6 \strokec6 >\cf5 \strokec5 APU\cf4 \strokec4  \cf5 \strokec5 Fleet\cf4 \strokec4  \cf5 \strokec5 Calculator\cf4 \strokec4  \cf5 \strokec5 Dashboard\cf6 \strokec6 </\cf4 \strokec4 h1\cf6 \strokec6 >\cf4 \cb1 \strokec4 \
+\cb3         \cf6 \strokec6 <\cf4 \strokec4 p className\cf6 \strokec6 =\cf7 \strokec7 "text-gray-400 mt-2"\cf6 \strokec6 >\cf5 \strokec5 Evaluate\cf4 \strokec4  fuel cost savings \cf2 \strokec2 from\cf4 \strokec4  installing \cf5 \strokec5 Auxiliary\cf4 \strokec4  \cf5 \strokec5 Power\cf4 \strokec4  \cf5 \strokec5 Units\cf4 \strokec4  \cf6 \strokec6 (\cf5 \strokec5 APUs\cf6 \strokec6 )</\cf4 \strokec4 p\cf6 \strokec6 >\cf4 \cb1 \strokec4 \
+\cb3       \cf6 \strokec6 </\cf4 \strokec4 div\cf6 \strokec6 >\cf4 \cb1 \strokec4 \
+\
+\cb3       \cf6 \strokec6 \{\cf9 \strokec9 /* Summary Cards */\cf6 \strokec6 \}\cf4 \cb1 \strokec4 \
+\cb3       \cf6 \strokec6 <\cf4 \strokec4 div className\cf6 \strokec6 =\cf7 \strokec7 "grid grid-cols-1 md:grid-cols-5 gap-4 mb-10"\cf6 \strokec6 >\cf4 \cb1 \strokec4 \
+\cb3         \cf6 \strokec6 <\cf5 \strokec5 SummaryCard\cf4 \strokec4  \cb1 \
+\cb3           title\cf6 \strokec6 =\cf7 \strokec7 "PRE-APU ANNUAL COST"\cf4 \strokec4  \cb1 \
+\cb3           value\cf6 \strokec6 =\{\cf7 \strokec7 `\cf10 \strokec10 $\cf6 \strokec6 $\{\cf5 \strokec5 Math\cf6 \strokec6 .\cf4 \strokec4 round\cf6 \strokec6 (\cf4 \strokec4 results\cf6 \strokec6 .\cf4 \strokec4 preApuCostPerTruck\cf6 \strokec6 ).\cf4 \strokec4 toLocaleString\cf6 \strokec6 ()\}\cf7 \strokec7 `\cf6 \strokec6 \}\cf4 \strokec4  \cb1 \
+\cb3           subtitle1\cf6 \strokec6 =\cf7 \strokec7 "Per Truck"\cf4 \strokec4  \cb1 \
+\cb3           subtitle2\cf6 \strokec6 =\{\cf7 \strokec7 `\cf10 \strokec10 $\cf6 \strokec6 $\{\cf5 \strokec5 Math\cf6 \strokec6 .\cf4 \strokec4 round\cf6 \strokec6 (\cf4 \strokec4 results\cf6 \strokec6 .\cf4 \strokec4 preApuCostTotal\cf6 \strokec6 ).\cf4 \strokec4 toLocaleString\cf6 \strokec6 ()\}\cf7 \strokec7  Fleet Total`\cf6 \strokec6 \}\cf4 \strokec4  \cb1 \
+\cb3           valueColor\cf6 \strokec6 =\{\cf4 \strokec4 colors\cf6 \strokec6 .\cf4 \strokec4 positive\cf6 \strokec6 \}\cf4 \cb1 \strokec4 \
+\cb3           boldSubtitle2\cf6 \strokec6 =\{\cf2 \strokec2 true\cf6 \strokec6 \}\cf4 \cb1 \strokec4 \
+\cb3         />\cb1 \
+\cb3         \cf6 \strokec6 <\cf5 \strokec5 SummaryCard\cf4 \strokec4  \cb1 \
+\cb3           title\cf6 \strokec6 =\cf7 \strokec7 "POST-APU ANNUAL COST"\cf4 \strokec4  \cb1 \
+\cb3           value\cf6 \strokec6 =\{\cf7 \strokec7 `\cf10 \strokec10 $\cf6 \strokec6 $\{\cf5 \strokec5 Math\cf6 \strokec6 .\cf4 \strokec4 round\cf6 \strokec6 (\cf4 \strokec4 results\cf6 \strokec6 .\cf4 \strokec4 postApuCostPerTruck\cf6 \strokec6 ).\cf4 \strokec4 toLocaleString\cf6 \strokec6 ()\}\cf7 \strokec7 `\cf6 \strokec6 \}\cf4 \strokec4  \cb1 \
+\cb3           subtitle1\cf6 \strokec6 =\cf7 \strokec7 "Per Truck"\cf4 \strokec4  \cb1 \
+\cb3           subtitle2\cf6 \strokec6 =\{\cf7 \strokec7 `\cf10 \strokec10 $\cf6 \strokec6 $\{\cf5 \strokec5 Math\cf6 \strokec6 .\cf4 \strokec4 round\cf6 \strokec6 (\cf4 \strokec4 results\cf6 \strokec6 .\cf4 \strokec4 postApuCostTotal\cf6 \strokec6 ).\cf4 \strokec4 toLocaleString\cf6 \strokec6 ()\}\cf7 \strokec7  Fleet Total`\cf6 \strokec6 \}\cf4 \strokec4  \cb1 \
+\cb3           valueColor\cf6 \strokec6 =\{\cf4 \strokec4 colors\cf6 \strokec6 .\cf4 \strokec4 positive\cf6 \strokec6 \}\cf4 \cb1 \strokec4 \
+\cb3           boldSubtitle2\cf6 \strokec6 =\{\cf2 \strokec2 true\cf6 \strokec6 \}\cf4 \cb1 \strokec4 \
+\cb3         />\cb1 \
+\cb3         \cf6 \strokec6 <\cf5 \strokec5 SummaryCard\cf4 \strokec4  \cb1 \
+\cb3           title\cf6 \strokec6 =\cf7 \strokec7 "ANNUAL FUEL SAVINGS"\cf4 \strokec4  \cb1 \
+\cb3           value\cf6 \strokec6 =\{\cf7 \strokec7 `\cf10 \strokec10 $\cf6 \strokec6 $\{\cf5 \strokec5 Math\cf6 \strokec6 .\cf4 \strokec4 round\cf6 \strokec6 (\cf4 \strokec4 results\cf6 \strokec6 .\cf4 \strokec4 annualFuelSavingsTotal\cf6 \strokec6 ).\cf4 \strokec4 toLocaleString\cf6 \strokec6 ()\}\cf7 \strokec7 `\cf6 \strokec6 \}\cf4 \strokec4  \cb1 \
+\cb3           subtitle1\cf6 \strokec6 =\cf7 \strokec7 "Total Fleet"\cf4 \strokec4  \cb1 \
+\cb3           valueColor\cf6 \strokec6 =\{\cf4 \strokec4 colors\cf6 \strokec6 .\cf4 \strokec4 positive\cf6 \strokec6 \}\cf4 \cb1 \strokec4 \
+\cb3         />\cb1 \
+\cb3         \cf6 \strokec6 <\cf5 \strokec5 SummaryCard\cf4 \strokec4  \cb1 \
+\cb3           title\cf6 \strokec6 =\cf7 \strokec7 "NET ANNUAL SAVINGS"\cf4 \strokec4  \cb1 \
+\cb3           value\cf6 \strokec6 =\{\cf7 \strokec7 `\cf10 \strokec10 $\cf6 \strokec6 $\{\cf5 \strokec5 Math\cf6 \strokec6 .\cf4 \strokec4 round\cf6 \strokec6 (\cf4 \strokec4 results\cf6 \strokec6 .\cf4 \strokec4 netAnnualSavings\cf6 \strokec6 ).\cf4 \strokec4 toLocaleString\cf6 \strokec6 ()\}\cf7 \strokec7 `\cf6 \strokec6 \}\cf4 \strokec4  \cb1 \
+\cb3           subtitle1\cf6 \strokec6 =\cf7 \strokec7 "After Maintenance"\cf4 \strokec4  \cb1 \
+\cb3           valueColor\cf6 \strokec6 =\{\cf4 \strokec4 colors\cf6 \strokec6 .\cf4 \strokec4 positive\cf6 \strokec6 \}\cf4 \cb1 \strokec4 \
+\cb3         />\cb1 \
+\cb3         \cf6 \strokec6 <\cf5 \strokec5 SummaryCard\cf4 \strokec4  \cb1 \
+\cb3           title\cf6 \strokec6 =\cf7 \strokec7 "PAYBACK PERIOD"\cf4 \strokec4  \cb1 \
+\cb3           value\cf6 \strokec6 =\{\cf4 \strokec4 results\cf6 \strokec6 .\cf4 \strokec4 paybackYears\cf6 \strokec6 .\cf4 \strokec4 toFixed\cf6 \strokec6 (\cf8 \strokec8 1\cf6 \strokec6 )\}\cf4 \strokec4  \cb1 \
+\cb3           subtitle1\cf6 \strokec6 =\cf7 \strokec7 "Years"\cf4 \strokec4  \cb1 \
+\cb3           valueColor\cf6 \strokec6 =\{\cf4 \strokec4 colors\cf6 \strokec6 .\cf4 \strokec4 positive\cf6 \strokec6 \}\cf4 \cb1 \strokec4 \
+\cb3         />\cb1 \
+\cb3       \cf6 \strokec6 </\cf4 \strokec4 div\cf6 \strokec6 >\cf4 \cb1 \strokec4 \
+\
+\cb3       \cf6 \strokec6 \{\cf9 \strokec9 /* Main Grid */\cf6 \strokec6 \}\cf4 \cb1 \strokec4 \
+\cb3       \cf6 \strokec6 <\cf4 \strokec4 div className\cf6 \strokec6 =\cf7 \strokec7 "grid grid-cols-1 lg:grid-cols-3 gap-8"\cf6 \strokec6 >\cf4 \cb1 \strokec4 \
+\cb3         \cf6 \strokec6 \{\cf9 \strokec9 /* Left Column - Fleet Parameters */\cf6 \strokec6 \}\cf4 \cb1 \strokec4 \
+\cb3         \cf6 \strokec6 <\cf4 \strokec4 div ref\cf6 \strokec6 =\{\cf4 \strokec4 leftPanelRef\cf6 \strokec6 \}\cf4 \strokec4  className\cf6 \strokec6 =\cf7 \strokec7 "bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-700 flex flex-col justify-between"\cf6 \strokec6 >\cf4 \cb1 \strokec4 \
+\cb3           \cf6 \strokec6 <\cf4 \strokec4 div\cf6 \strokec6 >\cf4 \cb1 \strokec4 \
+\cb3             \cf6 \strokec6 <\cf4 \strokec4 h2 className\cf6 \strokec6 =\cf7 \strokec7 "text-2xl font-bold text-white mb-6"\cf6 \strokec6 >\cf5 \strokec5 Fleet\cf4 \strokec4  \cf5 \strokec5 Parameters\cf6 \strokec6 </\cf4 \strokec4 h2\cf6 \strokec6 >\cf4 \cb1 \strokec4 \
+\cb3             \cf6 \strokec6 <\cf4 \strokec4 div className\cf6 \strokec6 =\cf7 \strokec7 "space-y-4"\cf6 \strokec6 >\cf4 \cb1 \strokec4 \
+\cb3               \cf6 \strokec6 <\cf5 \strokec5 InputGroup\cf4 \strokec4  label\cf6 \strokec6 =\cf7 \strokec7 "Fleet Size (# of trucks)"\cf4 \strokec4  name\cf6 \strokec6 =\cf7 \strokec7 "fleetSize"\cf4 \strokec4  \cf2 \strokec2 type\cf6 \strokec6 =\cf7 \strokec7 "number"\cf4 \strokec4  value\cf6 \strokec6 =\{\cf4 \strokec4 inputs\cf6 \strokec6 .\cf4 \strokec4 fleetSize\cf6 \strokec6 \}\cf4 \strokec4  onChange\cf6 \strokec6 =\{\cf4 \strokec4 handleInputChange\cf6 \strokec6 \}\cf4 \strokec4  />\cb1 \
+\cb3               \cf6 \strokec6 <\cf5 \strokec5 InputGroup\cf4 \strokec4  label\cf6 \strokec6 =\cf7 \strokec7 "Idle Time (hours/day)"\cf4 \strokec4  name\cf6 \strokec6 =\cf7 \strokec7 "idleTime"\cf4 \strokec4  \cf2 \strokec2 type\cf6 \strokec6 =\cf7 \strokec7 "number"\cf4 \strokec4  value\cf6 \strokec6 =\{\cf4 \strokec4 inputs\cf6 \strokec6 .\cf4 \strokec4 idleTime\cf6 \strokec6 \}\cf4 \strokec4  onChange\cf6 \strokec6 =\{\cf4 \strokec4 handleInputChange\cf6 \strokec6 \}\cf4 \strokec4  />\cb1 \
+\cb3               \cf6 \strokec6 <\cf5 \strokec5 InputGroup\cf4 \strokec4  label\cf6 \strokec6 =\cf7 \strokec7 "Fuel Price ($/gallon)"\cf4 \strokec4  name\cf6 \strokec6 =\cf7 \strokec7 "fuelPrice"\cf4 \strokec4  \cf2 \strokec2 type\cf6 \strokec6 =\cf7 \strokec7 "number"\cf4 \strokec4  value\cf6 \strokec6 =\{\cf4 \strokec4 inputs\cf6 \strokec6 .\cf4 \strokec4 fuelPrice\cf6 \strokec6 \}\cf4 \strokec4  onChange\cf6 \strokec6 =\{\cf4 \strokec4 handleInputChange\cf6 \strokec6 \}\cf4 \strokec4  />\cb1 \
+\cb3               \cf6 \strokec6 <\cf5 \strokec5 InputGroup\cf4 \strokec4  label\cf6 \strokec6 =\cf7 \strokec7 "APU Installation Cost ($/truck)"\cf4 \strokec4  name\cf6 \strokec6 =\cf7 \strokec7 "apuInstallationCost"\cf4 \strokec4  \cf2 \strokec2 type\cf6 \strokec6 =\cf7 \strokec7 "number"\cf4 \strokec4  value\cf6 \strokec6 =\{\cf4 \strokec4 inputs\cf6 \strokec6 .\cf4 \strokec4 apuInstallationCost\cf6 \strokec6 \}\cf4 \strokec4  onChange\cf6 \strokec6 =\{\cf4 \strokec4 handleInputChange\cf6 \strokec6 \}\cf4 \strokec4  />\cb1 \
+\cb3               \cf6 \strokec6 <\cf5 \strokec5 InputGroup\cf4 \strokec4  label\cf6 \strokec6 =\cf7 \strokec7 "Annual APU Maintenance Cost ($/truck)"\cf4 \strokec4  name\cf6 \strokec6 =\cf7 \strokec7 "apuMaintenanceCost"\cf4 \strokec4  \cf2 \strokec2 type\cf6 \strokec6 =\cf7 \strokec7 "number"\cf4 \strokec4  value\cf6 \strokec6 =\{\cf4 \strokec4 inputs\cf6 \strokec6 .\cf4 \strokec4 apuMaintenanceCost\cf6 \strokec6 \}\cf4 \strokec4  onChange\cf6 \strokec6 =\{\cf4 \strokec4 handleInputChange\cf6 \strokec6 \}\cf4 \strokec4  />\cb1 \
+\cb3               \cf6 \strokec6 <\cf5 \strokec5 InputGroup\cf4 \strokec4  label\cf6 \strokec6 =\cf7 \strokec7 "APU Useful Life (years)"\cf4 \strokec4  name\cf6 \strokec6 =\cf7 \strokec7 "apuUsefulLife"\cf4 \strokec4  \cf2 \strokec2 type\cf6 \strokec6 =\cf7 \strokec7 "number"\cf4 \strokec4  value\cf6 \strokec6 =\{\cf4 \strokec4 inputs\cf6 \strokec6 .\cf4 \strokec4 apuUsefulLife\cf6 \strokec6 \}\cf4 \strokec4  onChange\cf6 \strokec6 =\{\cf4 \strokec4 handleInputChange\cf6 \strokec6 \}\cf4 \strokec4  />\cb1 \
+\cb3               \cf6 \strokec6 <\cf5 \strokec5 InputGroup\cf4 \strokec4  label\cf6 \strokec6 =\cf7 \strokec7 "Operating Days Per Year"\cf4 \strokec4  name\cf6 \strokec6 =\cf7 \strokec7 "operatingDaysPerYear"\cf4 \strokec4  \cf2 \strokec2 type\cf6 \strokec6 =\cf7 \strokec7 "number"\cf4 \strokec4  value\cf6 \strokec6 =\{\cf4 \strokec4 inputs\cf6 \strokec6 .\cf4 \strokec4 operatingDaysPerYear\cf6 \strokec6 \}\cf4 \strokec4  onChange\cf6 \strokec6 =\{\cf4 \strokec4 handleInputChange\cf6 \strokec6 \}\cf4 \strokec4  />\cb1 \
+\cb3             \cf6 \strokec6 </\cf4 \strokec4 div\cf6 \strokec6 >\cf4 \cb1 \strokec4 \
+\cb3           \cf6 \strokec6 </\cf4 \strokec4 div\cf6 \strokec6 >\cf4 \cb1 \strokec4 \
+\cb3           \cf6 \strokec6 <\cf4 \strokec4 div className\cf6 \strokec6 =\cf7 \strokec7 "bg-gray-900 p-4 rounded-xl mt-6 border border-gray-700"\cf6 \strokec6 >\cf4 \cb1 \strokec4 \
+\cb3             \cf6 \strokec6 <\cf4 \strokec4 h3 className\cf6 \strokec6 =\cf7 \strokec7 "text-md font-semibold text-white mb-6 text-center"\cf6 \strokec6 >\cf5 \strokec5 Assumptions\cf4 \strokec4  \cf5 \strokec5 Used\cf6 \strokec6 </\cf4 \strokec4 h3\cf6 \strokec6 >\cf4 \cb1 \strokec4 \
+\cb3             \cf6 \strokec6 <\cf4 \strokec4 div className\cf6 \strokec6 =\cf7 \strokec7 "space-y-6"\cf6 \strokec6 >\cf4 \cb1 \strokec4 \
+\cb3                 \cf6 \strokec6 <\cf4 \strokec4 div className\cf6 \strokec6 =\cf7 \strokec7 "flex justify-between items-center text-sm text-gray-400"\cf6 \strokec6 >\cf4 \cb1 \strokec4 \
+\cb3                     \cf6 \strokec6 <\cf4 \strokec4 span className\cf6 \strokec6 =\cf7 \strokec7 "text-left"\cf6 \strokec6 >\cf5 \strokec5 Idling\cf4 \strokec4  \cf5 \strokec5 Fuel\cf4 \strokec4  \cf5 \strokec5 Consumption\cf6 \strokec6 <\cf4 \strokec4 br/>\cf6 \strokec6 (\cf5 \strokec5 Main\cf4 \strokec4  \cf5 \strokec5 Engine\cf6 \strokec6 )\cf4 \strokec4 :</span\cf6 \strokec6 >\cf4 \cb1 \strokec4 \
+\cb3                     \cf6 \strokec6 <\cf4 \strokec4 span className\cf6 \strokec6 =\cf7 \strokec7 "text-right"\cf6 \strokec6 >\cf8 \strokec8 0.8\cf4 \strokec4  gallons\cf6 \strokec6 <\cf4 \strokec4 br/>per hour\cf6 \strokec6 </\cf4 \strokec4 span\cf6 \strokec6 >\cf4 \cb1 \strokec4 \
+\cb3                 \cf6 \strokec6 </\cf4 \strokec4 div\cf6 \strokec6 >\cf4 \cb1 \strokec4 \
+\cb3                 \cf6 \strokec6 <\cf4 \strokec4 div className\cf6 \strokec6 =\cf7 \strokec7 "flex justify-between items-center text-sm text-gray-400"\cf6 \strokec6 >\cf4 \cb1 \strokec4 \
+\cb3                     \cf6 \strokec6 <\cf4 \strokec4 span className\cf6 \strokec6 =\cf7 \strokec7 "text-left"\cf6 \strokec6 >\cf5 \strokec5 Idling\cf4 \strokec4  \cf5 \strokec5 Fuel\cf4 \strokec4  \cf5 \strokec5 Consumption\cf6 \strokec6 <\cf4 \strokec4 br/>\cf6 \strokec6 (\cf5 \strokec5 APU\cf6 \strokec6 )\cf4 \strokec4 :</span\cf6 \strokec6 >\cf4 \cb1 \strokec4 \
+\cb3                     \cf6 \strokec6 <\cf4 \strokec4 span className\cf6 \strokec6 =\cf7 \strokec7 "text-right"\cf6 \strokec6 >\cf8 \strokec8 0.2\cf4 \strokec4  gallons\cf6 \strokec6 <\cf4 \strokec4 br/>per hour\cf6 \strokec6 </\cf4 \strokec4 span\cf6 \strokec6 >\cf4 \cb1 \strokec4 \
+\cb3                 \cf6 \strokec6 </\cf4 \strokec4 div\cf6 \strokec6 >\cf4 \cb1 \strokec4 \
+\cb3             \cf6 \strokec6 </\cf4 \strokec4 div\cf6 \strokec6 >\cf4 \cb1 \strokec4 \
+\cb3             \cf6 \strokec6 <\cf4 \strokec4 p className\cf6 \strokec6 =\cf7 \strokec7 "mt-6 text-[13px] text-gray-400 italic text-center"\cf6 \strokec6 >\cf5 \strokec5 These\cf4 \strokec4  values are based on commonly accepted industry averages and can be adjusted \cf2 \strokec2 for\cf4 \strokec4  a more precise analysis\cf6 \strokec6 .</\cf4 \strokec4 p\cf6 \strokec6 >\cf4 \cb1 \strokec4 \
+\cb3           \cf6 \strokec6 </\cf4 \strokec4 div\cf6 \strokec6 >\cf4 \cb1 \strokec4 \
+\cb3           \cf6 \strokec6 <\cf4 \strokec4 button onClick\cf6 \strokec6 =\{\cf4 \strokec4 handleReset\cf6 \strokec6 \}\cf4 \strokec4  className\cf6 \strokec6 =\cf7 \strokec7 "w-full bg-blue-600 text-white font-bold py-3 px-4 rounded-md shadow-lg hover:bg-blue-700 transition duration-200 mt-6"\cf6 \strokec6 >\cf4 \cb1 \strokec4 \
+\cb3             \cf5 \strokec5 Reset\cf4 \strokec4  to \cf5 \strokec5 Defaults\cf4 \cb1 \strokec4 \
+\cb3           \cf6 \strokec6 </\cf4 \strokec4 button\cf6 \strokec6 >\cf4 \cb1 \strokec4 \
+\cb3         \cf6 \strokec6 </\cf4 \strokec4 div\cf6 \strokec6 >\cf4 \cb1 \strokec4 \
+\
+\cb3         \cf6 \strokec6 \{\cf9 \strokec9 /* Right Column - Charts and Visuals */\cf6 \strokec6 \}\cf4 \cb1 \strokec4 \
+\cb3         \cf6 \strokec6 <\cf4 \strokec4 div ref\cf6 \strokec6 =\{\cf4 \strokec4 rightPanelRef\cf6 \strokec6 \}\cf4 \strokec4  className\cf6 \strokec6 =\cf7 \strokec7 "lg:col-span-2 space-y-8"\cf6 \strokec6 >\cf4 \cb1 \strokec4 \
+\cb3           \cf6 \strokec6 <\cf4 \strokec4 div className\cf6 \strokec6 =\cf7 \strokec7 "bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-700"\cf6 \strokec6 >\cf4 \cb1 \strokec4 \
+\cb3             \cf6 \strokec6 <\cf4 \strokec4 canvas ref\cf6 \strokec6 =\{\cf4 \strokec4 chart1Ref\cf6 \strokec6 \}\cf4 \strokec4  id\cf6 \strokec6 =\cf7 \strokec7 "chart1"\cf4 \strokec4 ></canvas\cf6 \strokec6 >\cf4 \cb1 \strokec4 \
+\cb3           \cf6 \strokec6 </\cf4 \strokec4 div\cf6 \strokec6 >\cf4 \cb1 \strokec4 \
+\cb3           \cf6 \strokec6 <\cf4 \strokec4 div className\cf6 \strokec6 =\cf7 \strokec7 "bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-700"\cf6 \strokec6 >\cf4 \cb1 \strokec4 \
+\cb3             \cf6 \strokec6 <\cf4 \strokec4 canvas ref\cf6 \strokec6 =\{\cf4 \strokec4 chart2Ref\cf6 \strokec6 \}\cf4 \strokec4  id\cf6 \strokec6 =\cf7 \strokec7 "chart2"\cf4 \strokec4 ></canvas\cf6 \strokec6 >\cf4 \cb1 \strokec4 \
+\cb3           \cf6 \strokec6 </\cf4 \strokec4 div\cf6 \strokec6 >\cf4 \cb1 \strokec4 \
+\cb3           \cf6 \strokec6 <\cf4 \strokec4 div className\cf6 \strokec6 =\cf7 \strokec7 "bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-700"\cf6 \strokec6 >\cf4 \cb1 \strokec4 \
+\cb3             \cf6 \strokec6 <\cf4 \strokec4 canvas ref\cf6 \strokec6 =\{\cf4 \strokec4 chart3Ref\cf6 \strokec6 \}\cf4 \strokec4  id\cf6 \strokec6 =\cf7 \strokec7 "chart3"\cf4 \strokec4 ></canvas\cf6 \strokec6 >\cf4 \cb1 \strokec4 \
+\cb3           \cf6 \strokec6 </\cf4 \strokec4 div\cf6 \strokec6 >\cf4 \cb1 \strokec4 \
+\cb3         \cf6 \strokec6 </\cf4 \strokec4 div\cf6 \strokec6 >\cf4 \cb1 \strokec4 \
+\cb3       \cf6 \strokec6 </\cf4 \strokec4 div\cf6 \strokec6 >\cf4 \cb1 \strokec4 \
+\
+\cb3       \cf6 \strokec6 \{\cf9 \strokec9 /* Summary Section */\cf6 \strokec6 \}\cf4 \cb1 \strokec4 \
+\cb3       \cf6 \strokec6 <\cf4 \strokec4 div className\cf6 \strokec6 =\cf7 \strokec7 "mt-10 p-6 rounded-xl border border-gray-700 bg-[var(--color-secondary)]"\cf6 \strokec6 >\cf4 \cb1 \strokec4 \
+\cb3         \cf6 \strokec6 <\cf4 \strokec4 h3 className\cf6 \strokec6 =\cf7 \strokec7 "text-xl font-bold text-white mb-4"\cf6 \strokec6 >\cf5 \strokec5 Fuel\cf4 \strokec4  \cf5 \strokec5 Cost\cf4 \strokec4  \cf5 \strokec5 Savings\cf4 \strokec4  \cf5 \strokec5 Summary\cf6 \strokec6 </\cf4 \strokec4 h3\cf6 \strokec6 >\cf4 \cb1 \strokec4 \
+\cb3         \cf6 \strokec6 <\cf4 \strokec4 p className\cf6 \strokec6 =\cf7 \strokec7 "text-white leading-relaxed"\cf4 \strokec4  dangerouslySetInnerHTML\cf6 \strokec6 =\{\{\cf4 \strokec4 __html\cf6 \strokec6 :\cf4 \strokec4  createSummaryParagraph\cf6 \strokec6 (\cf4 \cb1 \strokec4 \
+\cb3             inputs\cf6 \strokec6 .\cf4 \strokec4 fleetSize\cf6 \strokec6 ,\cf4 \cb1 \strokec4 \
+\cb3             results\cf6 \strokec6 .\cf4 \strokec4 netAnnualSavings\cf6 \strokec6 ,\cf4 \cb1 \strokec4 \
+\cb3             inputs\cf6 \strokec6 .\cf4 \strokec4 apuInstallationCost\cf6 \strokec6 ,\cf4 \cb1 \strokec4 \
+\cb3             results\cf6 \strokec6 .\cf4 \strokec4 paybackMonths\cb1 \
+\cb3           \cf6 \strokec6 )\}\}\cf4 \strokec4 ></p\cf6 \strokec6 >\cf4 \cb1 \strokec4 \
+\cb3       \cf6 \strokec6 </\cf4 \strokec4 div\cf6 \strokec6 >\cf4 \cb1 \strokec4 \
+\cb3     \cf6 \strokec6 </\cf4 \strokec4 div\cf6 \strokec6 >\cf4 \cb1 \strokec4 \
+\cb3   \cf6 \strokec6 );\cf4 \cb1 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf6 \cb3 \strokec6 \}\cf4 \cb1 \strokec4 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 const\cf4 \strokec4  \cf5 \strokec5 SummaryCard\cf4 \strokec4  \cf6 \strokec6 =\cf4 \strokec4  \cf6 \strokec6 (\{\cf4 \strokec4  title\cf6 \strokec6 ,\cf4 \strokec4  value\cf6 \strokec6 ,\cf4 \strokec4  subtitle1\cf6 \strokec6 ,\cf4 \strokec4  subtitle2\cf6 \strokec6 ,\cf4 \strokec4  valueColor\cf6 \strokec6 ,\cf4 \strokec4  boldSubtitle2 \cf6 \strokec6 \})\cf4 \strokec4  \cf6 \strokec6 =>\cf4 \strokec4  \cf6 \strokec6 (\cf4 \cb1 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3   \cf6 \strokec6 <\cf4 \strokec4 div className\cf6 \strokec6 =\cf7 \strokec7 "bg-gray-800 p-4 rounded-xl shadow-md text-center border border-gray-700 flex-1 flex flex-col justify-between"\cf6 \strokec6 >\cf4 \cb1 \strokec4 \
+\cb3     \cf6 \strokec6 <\cf4 \strokec4 div className\cf6 \strokec6 =\cf7 \strokec7 "flex-grow flex flex-col justify-center space-y-2"\cf6 \strokec6 >\cf4 \cb1 \strokec4 \
+\cb3       \cf6 \strokec6 <\cf4 \strokec4 p className\cf6 \strokec6 =\cf7 \strokec7 "text-gray-400 text-xs font-bold leading-none"\cf6 \strokec6 >\{\cf4 \strokec4 title\cf6 \strokec6 \}</\cf4 \strokec4 p\cf6 \strokec6 >\cf4 \cb1 \strokec4 \
+\cb3       \cf6 \strokec6 <\cf4 \strokec4 p className\cf6 \strokec6 =\cf7 \strokec7 "text-2xl font-bold leading-none"\cf4 \strokec4  style\cf6 \strokec6 =\{\{\cf4 \strokec4  color\cf6 \strokec6 :\cf4 \strokec4  valueColor \cf6 \strokec6 \}\}>\{\cf4 \strokec4 value\cf6 \strokec6 \}</\cf4 \strokec4 p\cf6 \strokec6 >\cf4 \cb1 \strokec4 \
+\cb3       \cf6 \strokec6 \{\cf4 \strokec4 subtitle1 \cf6 \strokec6 &&\cf4 \strokec4  \cf6 \strokec6 <\cf4 \strokec4 p className\cf6 \strokec6 =\cf7 \strokec7 "text-gray-400 text-xs leading-none"\cf6 \strokec6 >\{\cf4 \strokec4 subtitle1\cf6 \strokec6 \}</\cf4 \strokec4 p\cf6 \strokec6 >\}\cf4 \cb1 \strokec4 \
+\cb3     \cf6 \strokec6 </\cf4 \strokec4 div\cf6 \strokec6 >\cf4 \cb1 \strokec4 \
+\cb3     \cf6 \strokec6 \{\cf4 \strokec4 subtitle2 \cf6 \strokec6 &&\cf4 \strokec4  \cf6 \strokec6 (\cf4 \cb1 \strokec4 \
+\cb3       \cf6 \strokec6 <\cf4 \strokec4 p className\cf6 \strokec6 =\{\cf7 \strokec7 `text-gray-400 text-xs mt-2 leading-none`\cf6 \strokec6 \}>\cf4 \cb1 \strokec4 \
+\cb3         \cf6 \strokec6 \{\cf4 \strokec4 boldSubtitle2 \cf6 \strokec6 ?\cf4 \strokec4  \cf6 \strokec6 <\cf4 \strokec4 span className\cf6 \strokec6 =\cf7 \strokec7 "font-bold"\cf6 \strokec6 >\{\cf4 \strokec4 subtitle2\cf6 \strokec6 .\cf4 \strokec4 split\cf6 \strokec6 (\cf7 \strokec7 ' '\cf6 \strokec6 )[\cf8 \strokec8 0\cf6 \strokec6 ]\}</\cf4 \strokec4 span\cf6 \strokec6 >\cf4 \strokec4  \cf6 \strokec6 :\cf4 \strokec4  subtitle2\cf6 \strokec6 \}\cf4 \cb1 \strokec4 \
+\cb3         \cf6 \strokec6 \{\cf4 \strokec4 boldSubtitle2 \cf6 \strokec6 &&\cf4 \strokec4  \cf7 \strokec7 ` \cf6 \strokec6 $\{\cf4 \strokec4 subtitle2\cf6 \strokec6 .\cf4 \strokec4 split\cf6 \strokec6 (\cf7 \strokec7 ' '\cf6 \strokec6 ).\cf4 \strokec4 slice\cf6 \strokec6 (\cf8 \strokec8 1\cf6 \strokec6 ).\cf4 \strokec4 join\cf6 \strokec6 (\cf7 \strokec7 ' '\cf6 \strokec6 )\}\cf7 \strokec7 `\cf6 \strokec6 \}\cf4 \cb1 \strokec4 \
+\cb3       \cf6 \strokec6 </\cf4 \strokec4 p\cf6 \strokec6 >\cf4 \cb1 \strokec4 \
+\cb3     \cf6 \strokec6 )\}\cf4 \cb1 \strokec4 \
+\cb3   \cf6 \strokec6 </\cf4 \strokec4 div\cf6 \strokec6 >\cf4 \cb1 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf6 \cb3 \strokec6 );\cf4 \cb1 \strokec4 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 const\cf4 \strokec4  \cf5 \strokec5 InputGroup\cf4 \strokec4  \cf6 \strokec6 =\cf4 \strokec4  \cf6 \strokec6 (\{\cf4 \strokec4  label\cf6 \strokec6 ,\cf4 \strokec4  name\cf6 \strokec6 ,\cf4 \strokec4  \cf2 \strokec2 type\cf6 \strokec6 ,\cf4 \strokec4  value\cf6 \strokec6 ,\cf4 \strokec4  onChange \cf6 \strokec6 \})\cf4 \strokec4  \cf6 \strokec6 =>\cf4 \strokec4  \cf6 \strokec6 (\cf4 \cb1 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3   \cf6 \strokec6 <\cf4 \strokec4 div\cf6 \strokec6 >\cf4 \cb1 \strokec4 \
+\cb3     \cf6 \strokec6 <\cf4 \strokec4 label className\cf6 \strokec6 =\cf7 \strokec7 "block text-sm font-medium text-gray-400"\cf6 \strokec6 >\{\cf4 \strokec4 label\cf6 \strokec6 \}</\cf4 \strokec4 label\cf6 \strokec6 >\cf4 \cb1 \strokec4 \
+\cb3     \cf6 \strokec6 <\cf4 \strokec4 input\cb1 \
+\cb3       \cf2 \strokec2 type\cf6 \strokec6 =\{\cf2 \strokec2 type\cf6 \strokec6 \}\cf4 \cb1 \strokec4 \
+\cb3       name\cf6 \strokec6 =\{\cf4 \strokec4 name\cf6 \strokec6 \}\cf4 \cb1 \strokec4 \
+\cb3       value\cf6 \strokec6 =\{\cf4 \strokec4 value\cf6 \strokec6 \}\cf4 \cb1 \strokec4 \
+\cb3       onChange\cf6 \strokec6 =\{\cf4 \strokec4 onChange\cf6 \strokec6 \}\cf4 \cb1 \strokec4 \
+\cb3       className\cf6 \strokec6 =\cf7 \strokec7 "mt-1 block w-full rounded-md border-gray-600 bg-gray-700 text-white shadow-sm sm:text-sm p-2.5"\cf4 \cb1 \strokec4 \
+\cb3       style\cf6 \strokec6 =\{\{\cf4 \strokec4  fontFamily\cf6 \strokec6 :\cf4 \strokec4  \cf7 \strokec7 'Inter, sans-serif'\cf4 \strokec4  \cf6 \strokec6 \}\}\cf4 \cb1 \strokec4 \
+\cb3     />\cb1 \
+\cb3   \cf6 \strokec6 </\cf4 \strokec4 div\cf6 \strokec6 >\cf4 \cb1 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf6 \cb3 \strokec6 );\cf4 \cb1 \strokec4 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 export\cf4 \strokec4  \cf2 \strokec2 default\cf4 \strokec4  \cf5 \strokec5 App\cf6 \strokec6 ;\cf4 \cb1 \strokec4 \
+\
+}
